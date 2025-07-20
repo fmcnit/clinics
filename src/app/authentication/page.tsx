@@ -1,71 +1,51 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+"use client"
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SignForm from "./components/sing-form";
+
+
+
 
 const AuthenticationPage = () => {
-    return ( 
-        <div className="flex h-screen w-screen items-center justify-center">
-            <div className="flex w-full max-w-sm flex-col gap-6">
-                <Tabs defaultValue="account">
-                    <TabsList>
-                    <TabsTrigger value="account">Account</TabsTrigger>
-                    <TabsTrigger value="password">Password</TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="account">
-                    <Card>
-                        <CardHeader>
-                        <CardTitle>Account</CardTitle>
-                        <CardDescription>
-                            Make changes to your account here. Click save when you&apos;re
-                            done.
-                        </CardDescription>
-                        </CardHeader>
-                        <CardContent className="grid gap-6">
-                        <div className="grid gap-3">
-                            <Label htmlFor="tabs-demo-name">Name</Label>
-                            <Input id="tabs-demo-name" defaultValue="Pedro Duarte" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label htmlFor="tabs-demo-username">Username</Label>
-                            <Input id="tabs-demo-username" defaultValue="@peduarte" />
-                        </div>
-                        </CardContent>
-                        <CardFooter>
-                        <Button>Save changes</Button>
-                        </CardFooter>
-                    </Card>
-                    </TabsContent>
-                    <TabsContent value="password">
-                    <Card>
-                        <CardHeader>
-                        <CardTitle>Password</CardTitle>
-                        <CardDescription>
-                            Change your password here. After saving, you&apos;ll be logged
-                            out.
-                        </CardDescription>
-                        </CardHeader>
-                        <CardContent className="grid gap-6">
-                        <div className="grid gap-3">
-                            <Label htmlFor="tabs-demo-current">Current password</Label>
-                            <Input id="tabs-demo-current" type="password" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label htmlFor="tabs-demo-new">New password</Label>
-                            <Input id="tabs-demo-new" type="password" />
-                        </div>
-                        </CardContent>
-                        <CardFooter>
-                        <Button>Save password</Button>
-                        </CardFooter>
-                    </Card>
-                    </TabsContent>
-                </Tabs>
-            </div>
- 
-        </div>
-     );
+
+  
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Tabs defaultValue="login" className="w-[400px]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="login">Login</TabsTrigger>
+            <TabsTrigger value="register">Criar Conta</TabsTrigger>
+          </TabsList>
+
+          {/* Formulário Login */}
+          <TabsContent value="login">
+            <Card>
+              <CardHeader>
+                <CardTitle>Login</CardTitle>
+                <CardDescription>Faça login para continuar</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2"></CardContent>
+              <CardFooter>
+                <Button>Entrar</Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+
+          {/* Formulário de Criar conta*/}
+          <TabsContent value="register">
+            <SignForm />
+          </TabsContent>
+        </Tabs>
+      </div>
+    );
 }
+
+
  
 export default AuthenticationPage;
+
+
+
+
