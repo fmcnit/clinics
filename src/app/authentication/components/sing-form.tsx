@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 
 
 
+
 const registerSchema = z.object({
   name: z.string().trim().min(2, { message: "Nome é obrigatório" }),
   email: z
@@ -23,7 +24,7 @@ const registerSchema = z.object({
 });
 
 const SignForm = () => {
-  const route = useRouter();
+  const router = useRouter();
   const form = useForm<z.infer<typeof registerSchema>>({
   resolver: zodResolver(registerSchema),
   defaultValues: {
@@ -42,8 +43,9 @@ const SignForm = () => {
     },
     {
       onSuccess: ()=>{
-        route.push("/dashboardPage")
-      }
+        router.push("/dashboard")
+      },
+      
     })
   } 
 
@@ -52,7 +54,7 @@ const SignForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="m-3 space-y-8"
+          className="m-3 space-y-4"
         >
           <CardHeader>
             <CardTitle>Criar Conta</CardTitle>
@@ -79,7 +81,7 @@ const SignForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Cadastre um Email" {...field} />
+                    <Input placeholder="Cadastre um Email" {...field}/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

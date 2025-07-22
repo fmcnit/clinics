@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Loader2 } from "lucide-react";
 import {
   Form,
   FormField,
@@ -18,36 +19,56 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
-const registerSchema = z.object({
-  name: z.string().trim().min(2, { message: "Nome é obrigatório" }),
+const loginSchema = z.object({
   email: z
-    .email({ message: "Email Inválido" })
+    .string()
     .trim()
-    .min(1, { message: "Email é obrigatório" }),
-  password: z.string().min(6),
+    .email({ message: "E-mail inválido" })
+    .min(1, { message: "E-mail é obrigatório" }),
+    
+  password: z
+    .string()
+    .trim()
+    .min(8, { message: "A senha deve ter pelo menos 8 caracteres" }),
 });
 
 const LoginForm = () => {
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+  const router = useRouter();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    await authClient.signIn.email(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        onSuccess: () => {
+          router.push("/dashboard");
+        },
+        onError: () => {
+          toast.error("Email e senha inválidos");
+        },
+      },
+    );
   }
 
   return (
     <Card>
-      <Form {...form} >
+      <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="m-3 space-y-8">
           <CardHeader>
             <CardTitle>Entre com seu Login</CardTitle>
@@ -81,8 +102,16 @@ const LoginForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full">
-              Criar Conta
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitted}
+            >
+              {form.formState.isSubmitted ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                "Entrar"
+              )}
             </Button>
           </CardFooter>
         </form>
