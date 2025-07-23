@@ -26,8 +26,10 @@ const registerSchema = z.object({
 
 const SignForm = () => {
   const router = useRouter();
+
   const form = useForm<z.infer<typeof registerSchema>>({
   resolver: zodResolver(registerSchema),
+  
   defaultValues: {
       name: "",
       email: "",

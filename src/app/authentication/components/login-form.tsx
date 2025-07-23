@@ -27,10 +27,8 @@ import { toast } from "sonner";
 import z from "zod";
 
 const loginSchema = z.object({
-  email: z
-    .string()
+  email: z.email({ message: "E-mail inválido" })
     .trim()
-    .email({ message: "E-mail inválido" })
     .min(1, { message: "E-mail é obrigatório" }),
     
   password: z
