@@ -1,7 +1,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SignForm from "./components/sing-form";
-import LoginForm from "./components/login-form";
+import SignForm from "./_components/sing-form";
+import LoginForm from "./_components/login-form";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
