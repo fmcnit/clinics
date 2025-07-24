@@ -1,8 +1,9 @@
-import { PageActions, PageContainer, PageContent, PageDescription, PageHeader, PageHeaderContent, PageTitle } from "@/components/ui/page-container";
 
+import { PageActions, PageContainer, PageContent, PageDescription, PageHeader, PageHeaderContent, PageTitle } from "@/components/ui/page-container";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import AddDoctorButton from "./_components/add-doctor-button";
 
 const DoctorsPage = async () => {
 
@@ -26,7 +27,7 @@ const DoctorsPage = async () => {
             </PageDescription>
           </PageHeaderContent>
           <PageActions>
-            
+            <AddDoctorButton/>          
           </PageActions>
         </PageHeader>
         <PageContent>
