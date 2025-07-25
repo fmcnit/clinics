@@ -48,7 +48,7 @@ const AppSidebar = () => {
     const router = useRouter()
     const session = authClient.useSession()
     const pathName = usePathname()
-
+    console.log(session)
     const handleSingOut = async () =>{
       await authClient.signOut({
         fetchOptions: {
@@ -98,7 +98,7 @@ const AppSidebar = () => {
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div >
-                      <p className="font-semibold">{session.data?.user.clinic.name}</p>
+                     
                       <p className="text-[12px]">{session.data?.user.email}</p>
                     </div>
                   </SidebarMenuButton>

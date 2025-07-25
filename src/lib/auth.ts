@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+
 import * as schema from "@/db/schema";
 import { customSession } from "better-auth/plugins";
 import { eq } from "drizzle-orm";
@@ -32,10 +33,9 @@ export const auth = betterAuth({
             return{
               user: {
                 ...user,
-                clinic: clinic?.clinicId ? {
-                  id: clinic?.clinicId,
-                  name: clinic.clinic.name                 
-               } : undefined
+                clinic: {
+                  id: clinic?.clinicId
+                }
               },
               session,
             }
