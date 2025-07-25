@@ -47,7 +47,7 @@ const formSchema = z
   );
 
   interface UpsertDoctorFormProps {
-    onSuccess: ()=> void
+    onSuccess?: ()=> void
   }
 
 const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
@@ -85,14 +85,14 @@ const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
     }
 
     return (
-      <DialogContent className="h-screen">
+      <DialogContent className="h-full">
         <DialogHeader>
           <DialogTitle>Adicionar Médico</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-4 overflow-scroll"
+            className="w-full space-y-4 overflow-y-auto"
           >
             <FormField
               control={form.control}

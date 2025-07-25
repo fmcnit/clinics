@@ -104,7 +104,7 @@ const SignForm = () => {
                 <FormItem>
                   <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Cadastre uma Senha" {...field} />
+                    <Input placeholder="Cadastre uma Senha" {...field} type="password"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
