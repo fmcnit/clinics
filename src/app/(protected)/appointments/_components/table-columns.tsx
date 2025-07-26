@@ -30,23 +30,34 @@ export const appointmentsTableColumns: ColumnDef<AppointmentWithRelations>[] = [
     header: "Paciente",
   },
   {
+    id: "date",
+    accessorKey: "date",
+    header: "Hora",
+    cell: (params) => {
+      const appointment = params.row.original;
+      return format(new Date(appointment.date), "dd/MM/yyyy", {
+        locale: ptBR,
+      });
+    },
+  },
+  {
+    id: "hour",
+    accessorKey: "hour",
+    header: "Horario",
+    cell: (params) => {
+      const appointment = params.row.original;
+      return format(new Date(appointment.date),"HH:mm", {
+        locale: ptBR,
+      });
+    },
+  },
+  {
     id: "doctor",
     accessorKey: "doctor.name",
     header: "Médico",
     cell: (params) => {
       const appointment = params.row.original;
       return `${appointment.doctor.name}`;
-    },
-  },
-  {
-    id: "date",
-    accessorKey: "date",
-    header: "Data e Hora",
-    cell: (params) => {
-      const appointment = params.row.original;
-      return format(new Date(appointment.date), "dd/MM/yyyy 'às' HH:mm", {
-        locale: ptBR,
-      });
     },
   },
   {

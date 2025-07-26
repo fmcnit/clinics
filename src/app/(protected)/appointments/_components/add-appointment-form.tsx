@@ -290,7 +290,8 @@ const AddAppointmentForm = ({
                       disabled={(date) =>
                         date < new Date() || !isDateAvailable(date)
                       }
-                      initialFocus
+                      locale={ptBR}
+                      
                     />
                   </PopoverContent>
                 </Popover>

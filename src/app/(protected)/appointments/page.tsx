@@ -18,6 +18,7 @@ import { auth } from "@/lib/auth";
 
 import AddAppointmentButton from "./_components/add-appointment-button";
 import { appointmentsTableColumns } from "./_components/table-columns";
+import WithAuthentication from "@/hocs/with-authentication";
 
 const AppointmentsPage = async () => {
   const session = await auth.api.getSession({
@@ -40,24 +41,24 @@ const AppointmentsPage = async () => {
   ]);
 
   return (
-    
-    <PageContainer>
-      <PageHeader>
-        <PageHeaderContent>
-          <PageTitle>Agendamentos</PageTitle>
-          <PageDescription>
-            Gerencie os agendamentos da sua clínica
-          </PageDescription>
-        </PageHeaderContent>
-        <PageActions>
-          <AddAppointmentButton patients={patients} doctors={doctors} />
-        </PageActions>
-      </PageHeader>
-      <PageContent>
-        <DataTable data={appointments} columns={appointmentsTableColumns} />
-      </PageContent>
-    </PageContainer>
-    
+    <WithAuthentication mustHaveClinic>
+      <PageContainer>
+        <PageHeader>
+          <PageHeaderContent>
+            <PageTitle>Agendamentos</PageTitle>
+            <PageDescription>
+              Gerencie os agendamentos da sua clínica
+            </PageDescription>
+          </PageHeaderContent>
+          <PageActions>
+            <AddAppointmentButton patients={patients} doctors={doctors} />
+          </PageActions>
+        </PageHeader>
+        <PageContent>
+          <DataTable data={appointments} columns={appointmentsTableColumns}/>
+        </PageContent>
+      </PageContainer>
+    </WithAuthentication>
   );
 };
 
