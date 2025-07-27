@@ -14,6 +14,7 @@ import { protectedWithClinicActionClient } from "@/lib/next-safe-actions";
 export const addAppointment = protectedWithClinicActionClient
   .schema(addAppointmentSchema)
   .action(async ({ parsedInput, ctx }) => {
+    
     const availableTimes = await getAvailableTimes({
       doctorId: parsedInput.doctorId,
       date: dayjs(parsedInput.date).format("YYYY-MM-DD"),
