@@ -10,6 +10,7 @@ import {
   UsersRound,
   Settings,
   LogOut,
+  Gem,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -87,6 +88,24 @@ const AppSidebar = () => {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
+          <SidebarGroup>
+            <SidebarGroupLabel>Outros</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathName === "/subscription"}
+                  >
+                    <Link href="/subscription">
+                      <Gem />
+                      <span>Assinatura</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
           <SidebarMenu>
@@ -97,8 +116,7 @@ const AppSidebar = () => {
                     <Avatar>
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div >
-                     
+                    <div>
                       <p className="text-[12px]">{session.data?.user.email}</p>
                     </div>
                   </SidebarMenuButton>
